@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Reports — CampusRecover</title>
+  <meta name="description" content="View and manage your lost and found item reports on CampusRecover." />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+  <div class="page-loader" id="page-loader"><div class="loader-ring"></div></div>
+
+  <div class="app-layout" id="app-layout">
+    <div class="main-content">
+      <div id="app-topbar"></div>
+
+      <main class="page-container page-content">
+
+        <div class="page-hero">
+          <div class="page-hero-badge">My Reports</div>
+          <h1 class="page-hero-title">My Reports</h1>
+          <p class="page-hero-subtitle">Manage all your lost and found item reports. Edit, delete, or mark items as returned.</p>
+        </div>
+
+        <div style="display:flex;gap:var(--space-3);margin-bottom:var(--space-6);flex-wrap:wrap;">
+          <a href="report-lost.html" class="btn btn-primary">Report Lost Item</a>
+          <a href="report-found.html" class="btn btn-accent">Report Found Item</a>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+          <button class="tab active" id="tab-lost">
+            Lost Items
+            <span class="nav-badge" id="lost-tab-count">0</span>
+          </button>
+          <button class="tab" id="tab-found">
+            Found Items
+            <span class="nav-badge" id="found-tab-count">0</span>
+          </button>
+        </div>
+
+        <!-- Lost Reports Panel -->
+        <div id="panel-lost">
+          <div class="report-table-wrap table-scroll">
+            <table class="report-table">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Category</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                  <th>Posted</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="lost-table-body">
+                <tr><td colspan="6" style="text-align:center;padding:var(--space-8);color:var(--text-muted);">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Found Reports Panel -->
+        <div id="panel-found" style="display:none;">
+          <div class="report-table-wrap table-scroll">
+            <table class="report-table">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Category</th>
+                  <th>Found Location</th>
+                  <th>Status</th>
+                  <th>Posted</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="found-table-body">
+                <tr><td colspan="6" style="text-align:center;padding:var(--space-8);color:var(--text-muted);">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Legend -->
+        <div style="display:flex;gap:var(--space-4);flex-wrap:wrap;margin-top:var(--space-6);padding:var(--space-4);background:var(--bg-card);border:1px solid var(--border);border-radius:var(--border-radius);">
+          <span style="font-size:var(--text-xs);color:var(--text-muted);font-weight:600;">Actions:</span>
+          <span style="font-size:var(--text-xs);color:var(--text-secondary);">View — open details</span>
+          <span style="font-size:var(--text-xs);color:var(--text-secondary);">Return — mark as returned</span>
+          <span style="font-size:var(--text-xs);color:var(--text-secondary);">Edit — modify report</span>
+          <span style="font-size:var(--text-xs);color:var(--text-secondary);">Delete — remove report</span>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/claim.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script>
+    Theme.apply(Theme.current());
+    injectNav('my-reports');
+  </script>
+  <script src="js/my-reports.js"></script>
+</body>
+</html>

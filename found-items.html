@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Found Items — CampusRecover</title>
+  <meta name="description" content="Browse items found on campus. Claim your lost item by verifying ownership." />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+  <div class="page-loader" id="page-loader"><div class="loader-ring"></div></div>
+
+  <div class="app-layout" id="app-layout">
+    <div class="main-content">
+      <div id="app-topbar"></div>
+
+      <main class="page-container page-content">
+
+        <div class="page-hero">
+          <div class="page-hero-badge">Found Items</div>
+          <h1 class="page-hero-title">Found Item Reports</h1>
+          <p class="page-hero-subtitle">These items have been turned in. Click <strong>Claim Item</strong> and verify ownership to get the finder's contact.</p>
+        </div>
+
+        <!-- Privacy notice -->
+        <div style="background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.2);border-radius:var(--border-radius);padding:var(--space-4) var(--space-5);margin-bottom:var(--space-6);display:flex;align-items:center;gap:var(--space-3);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div>
+            <strong style="color:var(--primary-light);font-size:var(--text-sm);">Privacy Protected</strong>
+            <p style="font-size:var(--text-xs);color:var(--text-secondary);margin:0;">Finder contact information is hidden until you verify ownership with the unique identifier.</p>
+          </div>
+        </div>
+
+        <!-- Search & Filters -->
+        <div class="search-filter-bar">
+          <div class="search-input-wrap">
+            <span class="search-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+            <input type="search" id="search-input" placeholder="Search by item name, location…" autocomplete="off" />
+          </div>
+          <select class="filter-select" id="category-filter">
+            <option value="">All Categories</option>
+          </select>
+          <select class="filter-select" id="status-filter">
+            <option value="">All Status</option>
+            <option value="found">Available</option>
+            <option value="returned">Returned</option>
+          </select>
+          <select class="filter-select" id="sort-filter">
+            <option value="latest">Latest First</option>
+            <option value="oldest">Oldest First</option>
+          </select>
+        </div>
+
+        <!-- Category Quick Filters -->
+        <div class="filter-chips">
+          <button class="filter-chip active" data-category="all">All</button>
+          <button class="filter-chip" data-category="Electronics">Electronics</button>
+          <button class="filter-chip" data-category="Wallet">Wallet</button>
+          <button class="filter-chip" data-category="ID Card">ID Card</button>
+          <button class="filter-chip" data-category="Keys">Keys</button>
+          <button class="filter-chip" data-category="Books">Books</button>
+          <button class="filter-chip" data-category="Accessories">Accessories</button>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-5);">
+          <span style="font-size:var(--text-sm);color:var(--text-muted);" id="items-count">Loading…</span>
+          <a href="report-found.html" class="btn btn-accent btn-sm">Report Found Item</a>
+        </div>
+
+        <div class="items-grid" id="found-items-grid"></div>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/claim.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script>
+    Theme.apply(Theme.current());
+    injectNav('found-items');
+  </script>
+  <script src="js/found-items.js"></script>
+</body>
+</html>

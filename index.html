@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusRecover — Lost & Found Portal</title>
+  <meta name="description" content="CampusRecover is a secure Lost & Found portal exclusively for college students." />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <style>
+    .particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .particle {
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: particleFloat linear infinite;
+    }
+    @keyframes particleFloat {
+      0%   { transform: translateY(100vh); opacity: 0; }
+      10%  { opacity: 0.3; }
+      90%  { opacity: 0.3; }
+      100% { transform: translateY(-100px); opacity: 0; }
+    }
+    .password-toggle {
+      position: absolute; right: 14px; top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none;
+      cursor: pointer; color: var(--text-muted);
+      padding: 4px; transition: color var(--transition-fast);
+      display: flex; align-items: center;
+    }
+    .password-toggle:hover { color: var(--text-primary); }
+    .input-wrapper { position: relative; }
+    .forgot-link {
+      display: block; text-align: right;
+      font-size: var(--text-xs); color: var(--primary);
+      margin-top: var(--space-1); cursor: pointer;
+    }
+    .feature-pills {
+      display: flex; gap: var(--space-2);
+      flex-wrap: wrap; justify-content: center;
+      margin-top: var(--space-6);
+    }
+    .feature-pill {
+      padding: 5px 12px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <div class="page-loader" id="page-loader">
+    <div class="loader-ring"></div>
+  </div>
+
+  <main class="login-page">
+    <div class="login-bg-orb orb-1"></div>
+    <div class="login-bg-orb orb-2"></div>
+    <div class="login-bg-orb orb-3"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="login-container animate-fadeInUp">
+      <div class="login-card">
+
+        <!-- Logo -->
+        <div class="login-logo">
+          <div class="login-logo-icon animate-pulse-glow">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+          </div>
+          <h1>Campus<span>Recover</span></h1>
+          <p>Your campus Lost &amp; Found Portal</p>
+        </div>
+
+        <!-- Demo hint -->
+        <div class="login-demo-hint">
+          <strong>Demo Credentials</strong>
+          <table style="width:100%;margin-top:8px;border-collapse:collapse;font-size:var(--text-xs);">
+            <thead>
+              <tr style="color:var(--text-muted);">
+                <th style="text-align:left;padding:4px 8px;font-weight:600;">Name</th>
+                <th style="text-align:left;padding:4px 8px;font-weight:600;">Enrollment</th>
+                <th style="text-align:left;padding:4px 8px;font-weight:600;">Password</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="cursor:pointer;" onclick="fillDemo('2024CS001','campus123')" title="Click to fill">
+                <td style="padding:4px 8px;color:var(--text-secondary);">Arjun Sharma</td>
+                <td style="padding:4px 8px;"><code>2024CS001</code></td>
+                <td style="padding:4px 8px;"><code>campus123</code></td>
+              </tr>
+              <tr style="cursor:pointer;" onclick="fillDemo('2023EC042','campus123')" title="Click to fill">
+                <td style="padding:4px 8px;color:var(--text-secondary);">Priya Patel</td>
+                <td style="padding:4px 8px;"><code>2023EC042</code></td>
+                <td style="padding:4px 8px;"><code>campus123</code></td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="margin-top:8px;font-size:10px;color:var(--text-muted);text-align:center;">Click any row to auto-fill credentials</p>
+        </div>
+
+        <!-- Form -->
+        <form id="login-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="enrollment">Enrollment Number <span class="required">*</span></label>
+            <input type="text" id="enrollment" class="form-input" placeholder="e.g. 2024CS001" autocomplete="username" spellcheck="false" required />
+            <div id="enrollment-error" class="form-error" style="display:none;">Please enter your enrollment number.</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">Password <span class="required">*</span></label>
+            <div class="input-wrapper">
+              <input type="password" id="password" class="form-input" placeholder="Enter your password" autocomplete="current-password" required style="padding-right:48px;" />
+              <button type="button" class="password-toggle" id="toggle-password" title="Show/Hide password">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="eye-icon">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+            <div id="password-error" class="form-error" style="display:none;">Please enter your password.</div>
+            <a class="forgot-link" onclick="Toast.info('Password Reset', 'Please contact your college IT department to reset your password.')">Forgot password?</a>
+          </div>
+
+          <div id="login-error" class="form-error" style="display:none;margin-bottom:var(--space-4);font-size:var(--text-sm);background:var(--danger-glow);padding:var(--space-3);border-radius:var(--radius-sm);"></div>
+
+          <button type="submit" class="btn btn-primary w-full btn-lg" id="login-btn" style="margin-top:var(--space-2);">
+            <span id="login-btn-text">Sign In</span>
+            <span id="login-spinner" class="spinner" style="display:none;"></span>
+          </button>
+        </form>
+
+        <div class="feature-pills">
+          <span class="feature-pill">Secure Verification</span>
+          <span class="feature-pill">Mobile Friendly</span>
+          <span class="feature-pill">Privacy Protected</span>
+        </div>
+      </div>
+
+      <p style="text-align:center;margin-top:var(--space-5);font-size:var(--text-xs);color:var(--text-muted);">
+        Made for campus students &nbsp;·&nbsp;
+        <button style="background:none;border:none;color:var(--primary);cursor:pointer;font-size:var(--text-xs);" onclick="Theme.toggle()">Toggle Theme</button>
+      </p>
+    </div>
+  </main>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ui.js"></script>
+  <script>
+    // Particles
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 25; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.cssText = `
+        left: ${Math.random() * 100}%;
+        width: ${Math.random() * 3 + 1}px;
+        height: ${Math.random() * 3 + 1}px;
+        animation-duration: ${Math.random() * 15 + 8}s;
+        animation-delay: ${Math.random() * 10}s;
+        background: ${Math.random() > 0.5 ? 'var(--primary)' : 'var(--accent)'};
+      `;
+      particlesContainer.appendChild(p);
+    }
+
+    // Auto-fill demo credentials on row click
+    function fillDemo(enrollment, password) {
+      document.getElementById('enrollment').value = enrollment;
+      document.getElementById('password').value   = password;
+      document.getElementById('enrollment').classList.remove('error');
+      document.getElementById('password').classList.remove('error');
+      document.getElementById('login-error').style.display = 'none';
+      document.getElementById('enrollment-error').style.display = 'none';
+      document.getElementById('password-error').style.display   = 'none';
+    }
+
+    Theme.apply(Theme.current());
+    Auth.redirectIfLoggedIn();
+
+    // Password toggle
+    document.getElementById('toggle-password')?.addEventListener('click', () => {
+      const pwd = document.getElementById('password');
+      pwd.type = pwd.type === 'password' ? 'text' : 'password';
+    });
+
+    // Login form
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const enrollment = document.getElementById('enrollment').value;
+      const password   = document.getElementById('password').value;
+      const loginError = document.getElementById('login-error');
+      const loginBtn   = document.getElementById('login-btn');
+
+      loginError.style.display = 'none';
+      document.getElementById('enrollment-error').style.display = 'none';
+      document.getElementById('password-error').style.display   = 'none';
+
+      let valid = true;
+      if (!enrollment.trim()) {
+        document.getElementById('enrollment-error').style.display = 'flex';
+        document.getElementById('enrollment').classList.add('error');
+        valid = false;
+      }
+      if (!password.trim()) {
+        document.getElementById('password-error').style.display = 'flex';
+        document.getElementById('password').classList.add('error');
+        valid = false;
+      }
+      if (!valid) return;
+
+      document.getElementById('login-btn-text').style.display = 'none';
+      document.getElementById('login-spinner').style.display  = 'inline-block';
+      loginBtn.disabled = true;
+
+      await new Promise(r => setTimeout(r, 700));
+
+      const result = Auth.login(enrollment, password);
+
+      if (result.success) {
+        Toast.success('Welcome back', result.user.name);
+        setTimeout(() => { window.location.href = 'dashboard.html'; }, 700);
+      } else {
+        document.getElementById('login-btn-text').style.display = 'inline';
+        document.getElementById('login-spinner').style.display  = 'none';
+        loginBtn.disabled = false;
+        loginError.textContent = result.error;
+        loginError.style.display = 'flex';
+        document.getElementById('enrollment').classList.add('error');
+        document.getElementById('password').classList.add('error');
+      }
+    });
+
+    ['enrollment', 'password'].forEach(id => {
+      document.getElementById(id).addEventListener('input', () => {
+        document.getElementById(id).classList.remove('error');
+        document.getElementById(`${id}-error`).style.display = 'none';
+        document.getElementById('login-error').style.display = 'none';
+      });
+    });
+
+    window.addEventListener('load', () => Loader.hide());
+  </script>
+</body>
+</html>

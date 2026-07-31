@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Report Lost Item — CampusRecover</title>
+  <meta name="description" content="Report an item you've lost on campus." />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+  <div class="page-loader" id="page-loader"><div class="loader-ring"></div></div>
+
+  <div class="app-layout" id="app-layout">
+    <div class="main-content">
+      <div id="app-topbar"></div>
+
+      <main class="page-container page-content">
+        <div style="max-width:720px;margin:0 auto;">
+
+          <div class="page-hero">
+            <div class="page-hero-badge">New Report</div>
+            <h1 class="page-hero-title">Report Lost Item</h1>
+            <p class="page-hero-subtitle">Fill in as much detail as possible to help others identify your item quickly.</p>
+          </div>
+
+          <form class="form-card" id="report-lost-form" novalidate>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="item-name">Item Name <span class="required">*</span></label>
+                <input type="text" id="item-name" class="form-input" placeholder="e.g. iPhone 14 Pro, Blue Wallet" required />
+                <div id="item-name-error" class="form-error" style="display:none;">Item name is required.</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="category">Category <span class="required">*</span></label>
+                <select id="category" class="form-select" required>
+                  <option value="">Select a category…</option>
+                </select>
+                <div id="category-error" class="form-error" style="display:none;">Please select a category.</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="description">Description <span class="required">*</span></label>
+              <textarea id="description" class="form-textarea" rows="4" placeholder="Describe your item in detail: color, brand, distinguishing features…" required></textarea>
+              <div class="form-hint">Be specific — the more detail you provide, the easier it is to identify.</div>
+              <div id="description-error" class="form-error" style="display:none;">Description is required.</div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="location">Last Seen Location <span class="required">*</span></label>
+                <input type="text" id="location" class="form-input" placeholder="e.g. Library 2nd Floor, Block C Canteen" required />
+                <div id="location-error" class="form-error" style="display:none;">Location is required.</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="lost-date">Lost Date</label>
+                <input type="date" id="lost-date" class="form-input" />
+                <div class="form-hint">When did you last have it?</div>
+              </div>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="form-group">
+              <label class="form-label">Item Photo <span style="color:var(--text-muted);font-weight:400;">(Optional)</span></label>
+              <p class="form-hint" style="margin-bottom:var(--space-3);">A photo helps others recognize your item faster.</p>
+              <div id="upload-area" class="image-upload-area">
+                <input type="file" id="item-image" accept="image/*" />
+                <div class="upload-icon">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                </div>
+                <div class="upload-text">Click to upload or <span>drag & drop</span></div>
+                <div class="upload-hint">JPG, PNG, WebP — Max 5MB</div>
+              </div>
+              <div id="image-preview" class="image-preview">
+                <img src="" alt="Preview" />
+                <button type="button" class="image-preview-remove" title="Remove image">✕</button>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:var(--space-3);justify-content:flex-end;margin-top:var(--space-4);">
+              <a href="lost-items.html" class="btn btn-ghost">Cancel</a>
+              <button type="submit" class="btn btn-primary btn-lg" id="submit-btn">Submit Report</button>
+            </div>
+
+          </form>
+
+          <!-- Tips -->
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--border-radius);padding:var(--space-5);margin-top:var(--space-5);">
+            <h4 style="font-size:var(--text-base);font-weight:700;margin-bottom:var(--space-3);">Tips for better results</h4>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--space-2);">
+              <li style="font-size:var(--text-sm);color:var(--text-secondary);">Be precise about location — include floor, block, room number</li>
+              <li style="font-size:var(--text-sm);color:var(--text-secondary);">Mention the approximate time you last had the item</li>
+              <li style="font-size:var(--text-sm);color:var(--text-secondary);">List any unique marks, stickers, or damage on the item</li>
+              <li style="font-size:var(--text-sm);color:var(--text-secondary);">Check the Found Items section — someone may have already turned it in</li>
+            </ul>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+    Theme.apply(Theme.current());
+    injectNav('report-lost');
+  </script>
+  <script src="js/report-lost.js"></script>
+</body>
+</html>
