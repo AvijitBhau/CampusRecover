@@ -210,9 +210,7 @@ The project was developed and presented under a **2-hour development challenge**
 
 ### Dashboard
 
-![CampusRecover Dashboard](screenshots/dashboard.png)
 
-> Add your project screenshots inside a `screenshots` folder and update the image paths if required.
 
 ---
 
